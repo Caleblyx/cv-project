@@ -6,25 +6,33 @@ class AddEducationForm extends Component{
     }
 
     render() {
-        const {toggleForm} = this.props;
+        const {toggleForm, handleEducationCourseNameChange, handleEducationStartDateChange, handleEducationEndDateChange, handleEducationInstitutionNameChange, onSubmitEducation} = this.props;
         return (
-            <form className="education-form">
+            <form onSubmit={onSubmitEducation} className="education-form">
                 <div className="education-form-name-date">
                     <div>
-                        <label for="institute-name">Institution Name:  </label>
-                        <input name="institute-name"></input>
+                        <div>
+                            <label for="institute-name">Institution Name:  </label>
+                            <input onChange={handleEducationInstitutionNameChange} name="institute-name"></input>
+                        </div>
+                        <div>
+                            <label for="course-name">Course Name:  </label>
+                            <input onChange={handleEducationCourseNameChange} name="course-name"></input>
+                         </div>
                     </div>
                     <div>
-                        <label for="date">Date:  </label>
-                        <input type="date" name="date"></input>
+                        <div>
+                        <label for="Start date">Start date:  </label>
+                        <input onChange={handleEducationStartDateChange} type="date" name="Start date"></input>
+                        </div>
+                        <div>
+                        <label for="End date">End date: </label>
+                        <input onChange={handleEducationEndDateChange} type="date" name="End date"></input>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <label for="course-name">Course Name:  </label>
-                    <input name="course-name"></input>
-                </div>
                 <div className="education-form-buttons">
-                    <button>Confirm</button>
+                    <button type="submit">Confirm</button>
                     <button onClick= {e=>{e.preventDefault(); toggleForm();}}> Cancel</button>
                 </div>
             </form>

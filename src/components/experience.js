@@ -12,9 +12,6 @@ class Experience extends Component{
         const{showExperienceForm, experienceInstances, toggleExperienceForm} = this.props;
         const experienceSections = [];
 
-        console.log(toggleExperienceForm)
-        console.log(this.props);
-
         experienceInstances.forEach((experienceInstance) => {
             experienceSections.push(
                 <ExperienceInstance
@@ -28,7 +25,7 @@ class Experience extends Component{
             <div>
                 <div className='section-title'>Experience</div>
                 {experienceSections}
-                <AddExperienceButton buttonType="Work"/>
+                <AddExperienceButton buttonType="Work" toggleForm={toggleExperienceForm}/>
                 {showExperienceForm? <AddWorkExperienceForm toggleForm={toggleExperienceForm} />: null}
             </div>
         );

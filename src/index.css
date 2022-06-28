@@ -87,3 +87,21 @@ code {
   gap: 10px;
 }
 
+.dates{
+  display: flex;
+  gap: 5px;
+}
+
+.react-datepicker-ignore-onclickoutside,
+.react-datepicker__input-container > input{
+  width: 60px;
+}
+
+.react-datepicker-ignore-onclickoutside,
+.react-datepicker__input-container > input{
+  border: none;
+}
+
+.react-datepicker__input-container > input:hover{
+  border: solid black 1px;
+}

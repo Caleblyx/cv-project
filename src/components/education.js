@@ -8,15 +8,24 @@ class Education extends Component{
         super(props);
     }
     render() {
-        const {showEducationForm, educationInstances, toggleEducationForm} = this.props;
+        const {showEducationForm, educationInstances, toggleEducationForm, handleEducationCourseNameChange, handleEducationStartDateChange, handleEducationEndDateChange, handleEducationInstitutionNameChange, onSubmitEducation, handleEducationInstitutionNameChangeInstance, handleEducationCourseNameChangeInstance, handleEducationStartDateChangeInstance, handleEducationEndDateChangeInstance} = this.props;
         const educationSections = [];
-    
+        
+        console.log(handleEducationInstitutionNameChangeInstance);
+
         educationInstances.forEach((educationInstance) => {
             educationSections.push(
                 <EducationInstance
+                    key = {educationInstance.id}
+                    uid = {educationInstance.id}
                     institutionName = {educationInstance.institutionName}
                     courseName = {educationInstance.courseName}
-                    dateOfStudy = {educationInstance.dateOfStudy} />
+                    startDate = {educationInstance.startDate}
+                    endDate={educationInstance.endDate}
+                    handleEducationInstitutionNameChangeInstance = {handleEducationInstitutionNameChangeInstance}
+                    handleEducationCourseNameChangeInstance = {handleEducationCourseNameChangeInstance} 
+                    handleEducationStartDateChangeInstance = {handleEducationStartDateChangeInstance}
+                    handleEducationEndDateChangeInstance = {handleEducationEndDateChangeInstance}/>
             )
         })
 
@@ -26,7 +35,7 @@ class Education extends Component{
                 <div className="section-title">Education</div>
                 {educationSections}
                 <AddExperienceButton buttonType="Educational" toggleForm={toggleEducationForm}/>
-                {showEducationForm? <AddEducationForm toggleForm={toggleEducationForm}/> : null}
+                {showEducationForm? <AddEducationForm toggleForm={toggleEducationForm} handleEducationCourseNameChange = {handleEducationCourseNameChange} handleEducationStartDateChange = {handleEducationStartDateChange} handleEducationEndDateChange = {handleEducationEndDateChange} handleEducationInstitutionNameChange = {handleEducationInstitutionNameChange} onSubmitEducation={onSubmitEducation}/> : null}
             </div>
         );
     }

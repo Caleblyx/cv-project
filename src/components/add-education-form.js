@@ -12,21 +12,21 @@ class AddEducationForm extends Component{
                 <div className="education-form-name-date">
                     <div>
                         <div>
-                            <label for="institute-name">Institution Name:  </label>
+                            <label htmlFor="institute-name">Institution Name:  </label>
                             <input onChange={handleEducationInstitutionNameChange} name="institute-name"></input>
                         </div>
                         <div>
-                            <label for="course-name">Course Name:  </label>
+                            <label htmlFor="course-name">Course Name:  </label>
                             <input onChange={handleEducationCourseNameChange} name="course-name"></input>
                          </div>
                     </div>
                     <div>
                         <div>
-                        <label for="Start date">Start date:  </label>
+                        <label htmlFor="Start date">Start date:  </label>
                         <input onChange={handleEducationStartDateChange} type="date" name="Start date"></input>
                         </div>
                         <div>
-                        <label for="End date">End date: </label>
+                        <label htmlFor="End date">End date: </label>
                         <input onChange={handleEducationEndDateChange} type="date" name="End date"></input>
                         </div>
                     </div>

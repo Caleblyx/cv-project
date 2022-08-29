@@ -3,6 +3,7 @@ import {About} from './about.js';
 import {Education} from './education.js'
 import {Experience} from './experience.js'
 import uniqid from "uniqid";
+import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers.js';
 
 class CV extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class CV extends Component {
             showEducationForm: false,
             showExperienceForm: false,
             educationInstances: [{id: uniqid(), institutionName:"Cool University", courseName:"Generic Degree", startDate:"2017-03", endDate:"2018-03"}],
+            experienceInstances: [{companyName:"Cool company", positionTitle:"Software Engineer", startDate:"2018-05", endDate:"2019-01", mainTasks:["Develop cool applications", "Create good user experiences"]}],
             educationInputs: {
                 id: uniqid(),
                 institutionName: "",
@@ -20,8 +22,10 @@ class CV extends Component {
             },
             workInputs: {
                 companyName: "",
-                date: "",
-                courseName: ""
+                positionTitle: "",
+                startDate: "",
+                endDate: "",
+                mainTasks: []
             }
 
         }
@@ -30,6 +34,7 @@ class CV extends Component {
         this.handleEducationCourseNameChangeInstance = this.handleEducationCourseNameChangeInstance.bind(this);
         this.handleEducationStartDateChangeInstance = this.handleEducationStartDateChangeInstance.bind(this);
         this.handleEducationEndDateChangeInstance = this.handleEducationEndDateChangeInstance.bind(this);
+        this.handleEducationInstanceDeletion = this.handleEducationInstanceDeletion.bind(this);
 
         this.handleEducationInstitutionNameChange = this.handleEducationInstitutionNameChange.bind(this);
         this.handleEducationStartDateChange = this.handleEducationStartDateChange.bind(this);
@@ -40,6 +45,8 @@ class CV extends Component {
         this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
 
         this.onSubmitEducation = this.onSubmitEducation.bind(this);
+        
+        this.handleWorkCompanyNameChange = this.handleWorkCompanyNameChange.bind(this);
 
     }
     handleEducationEndDateChangeInstance(date, uid) {
@@ -57,7 +64,6 @@ class CV extends Component {
         console.log(index);
         const update = this.state.educationInstances.slice();
         console.log(update);
-        //console.log(date.toString());
         update[index].startDate = date.toString();
         this.setState({educationInstances: update});
 
@@ -148,6 +154,42 @@ class CV extends Component {
         }));
     }
 
+    handleWorkCompanyNameChange(e) {
+        this.setState(prevState => ({
+            workInputs: {
+                companyName: e.target.value,
+                poitionTitle: prevState.workInputs.positionTitle,
+                startDate: prevState.workInputs.startDate,
+                endDate: prevState.workInputs.endDate,
+                mainTasks: prevState.workInputs.mainTasks
+            }
+        }));
+    }
+
+
+    handleWorkStartDateChange(e){
+        this.setState(prevState => ({
+            workInputs: {
+                companyName: prevState.workInputs.companyName,
+                poitionTitle: prevState.workInputs.positionTitle,
+                startDate: e.target.value,
+                endDate: prevState.workInputs.endDate,
+                mainTasks: prevState.workInputs.mainTasks
+            }
+        }));
+    }
+
+    handleWorkEndDateChange(e){
+        this.setState(prevState => ({
+            workInputs: {
+                companyName: prevState.workInputs.companyName,
+                positionTitle: prevState.workInputs.positionTitle,
+                startDate: prevState.workInputs.startDate,
+                endDate: e.target.value,
+                mainTasks: prevState.workInputs.mainTasks
+            }
+        }));
+    }
 
     toggleEducationForm() {
         this.setState(prevState => ({
@@ -161,6 +203,11 @@ class CV extends Component {
         }));
     }
 
+    handleEducationInstanceDeletion(e, uid) {
+        this.setState(prevState => ({
+            educationInstances: prevState.educationInstances.filter(educationInstance => educationInstance.id != uid)
+        }))
+    }
 
     render() {
         console.log("rendering");
@@ -175,8 +222,9 @@ class CV extends Component {
                 onSubmitEducation = {this.onSubmitEducation} handleEducationInstitutionNameChangeInstance={this.handleEducationInstitutionNameChangeInstance}
                 handleEducationCourseNameChangeInstance={this.handleEducationCourseNameChangeInstance}
                 handleEducationStartDateChangeInstance = {this.handleEducationStartDateChangeInstance}
-                handleEducationEndDateChangeInstance = {this.handleEducationEndDateChangeInstance}/>
-                <Experience showExperienceForm={showExperienceForm} experienceInstances={[{companyName:"Cool company", positionTitle:"Software Engineer", dates:"21st March", mainTasks:["Develop cool applications", "Create good user experiences"]}]} toggleExperienceForm={this.toggleExperienceForm}/>
+                handleEducationEndDateChangeInstance = {this.handleEducationEndDateChangeInstance}
+                handleEducationInstanceDeletion = {this.handleEducationInstanceDeletion}/>
+                <Experience showExperienceForm={showExperienceForm} experienceInstances={this.state.experienceInstances} toggleExperienceForm={this.toggleExperienceForm}/>
             </div>
         );
     }

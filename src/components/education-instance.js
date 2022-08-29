@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DatePicker from "react-datepicker";
+import CrossLogo from './cross-logo.png'
 
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -9,10 +10,10 @@ class EducationInstance extends Component{
     }
    
     render() {
-        const {key, uid, institutionName, courseName, startDate, endDate, handleEducationInstitutionNameChangeInstance, handleEducationCourseNameChangeInstance, handleEducationStartDateChangeInstance, handleEducationEndDateChangeInstance } = this.props;
-        console.log(handleEducationStartDateChangeInstance );
+        const {key, uid, institutionName, courseName, startDate, endDate, handleEducationInstitutionNameChangeInstance, handleEducationCourseNameChangeInstance, handleEducationStartDateChangeInstance, handleEducationEndDateChangeInstance, handleEducationInstanceDeletion} = this.props;
         return(
-            <div>
+            <div className="education-instance">
+                <img src={CrossLogo} className='cancel-button' onClick={(e) => handleEducationInstanceDeletion(e, uid)}/>
                 <div className='education-name-date'>
                     <div contentEditable={true} onInput={(e)=>{handleEducationInstitutionNameChangeInstance(e, uid)}} className='education-instance-name'>{institutionName}</div>
                     <div className='dates'>

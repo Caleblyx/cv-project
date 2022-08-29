@@ -6,7 +6,7 @@ class ExperienceInstance extends Component{
     }
 
     render(){
-        const {companyName, positionTitle, mainTasks, dates} = this.props;
+        const {companyName, positionTitle, startDate, endDate, mainTasks} = this.props;
         const taskList = []
 
         mainTasks.forEach(task=>taskList.push(<li>{task}</li>))
@@ -14,7 +14,9 @@ class ExperienceInstance extends Component{
             <div>
                 <div className="experience-company-date">
                     <div className="experience-instance-name">{companyName}</div>
-                    <div>{dates}</div>
+                    <div>{startDate}</div>
+                    <div> to </div>
+                    <div>{endDate}</div>
                 </div>
                 <div>{positionTitle}</div>
                 <div>

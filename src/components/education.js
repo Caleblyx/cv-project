@@ -8,11 +8,20 @@ class Education extends Component{
         super(props);
     }
     render() {
-        const {showEducationForm, educationInstances, toggleEducationForm, handleEducationCourseNameChange, handleEducationStartDateChange, handleEducationEndDateChange, handleEducationInstitutionNameChange, onSubmitEducation, handleEducationInstitutionNameChangeInstance, handleEducationCourseNameChangeInstance, handleEducationStartDateChangeInstance, handleEducationEndDateChangeInstance} = this.props;
+        const {showEducationForm, 
+               educationInstances, 
+               toggleEducationForm, 
+               handleEducationCourseNameChange, 
+               handleEducationStartDateChange, 
+               handleEducationEndDateChange, 
+               handleEducationInstitutionNameChange, 
+               onSubmitEducation, handleEducationInstitutionNameChangeInstance, 
+               handleEducationCourseNameChangeInstance, 
+               handleEducationStartDateChangeInstance, 
+               handleEducationEndDateChangeInstance, 
+               handleEducationInstanceDeletion } = this.props;
         const educationSections = [];
         
-        console.log(handleEducationInstitutionNameChangeInstance);
-
         educationInstances.forEach((educationInstance) => {
             educationSections.push(
                 <EducationInstance
@@ -25,7 +34,8 @@ class Education extends Component{
                     handleEducationInstitutionNameChangeInstance = {handleEducationInstitutionNameChangeInstance}
                     handleEducationCourseNameChangeInstance = {handleEducationCourseNameChangeInstance} 
                     handleEducationStartDateChangeInstance = {handleEducationStartDateChangeInstance}
-                    handleEducationEndDateChangeInstance = {handleEducationEndDateChangeInstance}/>
+                    handleEducationEndDateChangeInstance = {handleEducationEndDateChangeInstance}
+                    handleEducationInstanceDeletion = {handleEducationInstanceDeletion}/>
             )
         })
 
@@ -35,7 +45,7 @@ class Education extends Component{
                 <div className="section-title">Education</div>
                 {educationSections}
                 <AddExperienceButton buttonType="Educational" toggleForm={toggleEducationForm}/>
-                {showEducationForm? <AddEducationForm toggleForm={toggleEducationForm} handleEducationCourseNameChange = {handleEducationCourseNameChange} handleEducationStartDateChange = {handleEducationStartDateChange} handleEducationEndDateChange = {handleEducationEndDateChange} handleEducationInstitutionNameChange = {handleEducationInstitutionNameChange} onSubmitEducation={onSubmitEducation}/> : null}
+                {showEducationForm? <AddEducationForm toggleForm={toggleEducationForm} handleEducationCourseNameChange = {handleEducationCourseNameChange} handleEducationStartDateChange = {handleEducationStartDateChange} handleEducationEndDateChange = {handleEducationEndDateChange} handleEducationInstitutionNameChange = {handleEducationInstitutionNameChange} onSubmitEducation={onSubmitEducation} handleEducationInstanceDeletion={handleEducationInstanceDeletion}/> : null}
             </div>
         );
     }

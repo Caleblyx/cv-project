@@ -94,7 +94,7 @@ code {
 
 .react-datepicker-ignore-onclickoutside,
 .react-datepicker__input-container > input{
-  width: 60px;
+  width: 80px;
 }
 
 .react-datepicker-ignore-onclickoutside,
@@ -104,4 +104,15 @@ code {
 
 .react-datepicker__input-container > input:hover{
   border: solid black 1px;
+}
+
+.cancel-button {
+  width: 20px;
+  margin-right: -20px;
+  float: right;
+  display: none;
+}
+
+.education-instance:hover .cancel-button {
+  display: block;
 }

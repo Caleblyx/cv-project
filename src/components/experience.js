@@ -17,7 +17,8 @@ class Experience extends Component{
                 <ExperienceInstance
                     companyName = {experienceInstance.companyName}
                     positionTitle = {experienceInstance.positionTitle}
-                    dates = {experienceInstance.dates} 
+                    startDate = {experienceInstance.startDate} 
+                    endDate = {experienceInstance.endDate}
                     mainTasks = {experienceInstance.mainTasks}/>
             )
         })

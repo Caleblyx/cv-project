@@ -11,17 +11,28 @@ class AddWorkExperienceForm extends Component{
             <form className="education-form">
             <div className="education-form-name-date">
                 <div>
-                    <label for="company-name">Company Name:  </label>
-                    <input name="company-name"></input>
+                    <div>
+                        <label for="company-name">Company Name:  </label>
+                        <input name="company-name"></input>
+                    </div>
+                    <div>
+                        <label for="job-title">Job Title:  </label>
+                        <input name="job-title"></input>
+                    </div>
                 </div>
                 <div>
-                    <label for="date">Date:  </label>
-                    <input type="date" name="date"></input>
+                    <div>
+                        <label for="Start date">Start date:  </label>
+                        <input type="date" name="Start date"></input>
+                    </div>
+                    <div>
+                        <label for="End date">End date: </label>
+                        <input type="date" name="End date"></input>
+                    </div>
                 </div>
             </div>
             <div>
-                <label for="job-title">Job Title:  </label>
-                <input name="job-title"></input>
+
             </div>
             <div className="education-form-buttons">
                 <button>Confirm</button>

@@ -6,36 +6,38 @@ class AddWorkExperienceForm extends Component{
     }
 
     render(){
-        const{toggleForm} = this.props;
+        const{toggleForm, handleWorkCompanyNameChange, handleWorkPositionTitleChange, handleWorkStartDateChange, handleWorkEndDateChange, onSubmitExperience} = this.props;
+        const taskList = []
         return (
-            <form className="education-form">
+            <form onSubmit={onSubmitExperience} className="education-form">
             <div className="education-form-name-date">
                 <div>
                     <div>
                         <label for="company-name">Company Name:  </label>
-                        <input name="company-name"></input>
+                        <input onChange={handleWorkCompanyNameChange} name="company-name"></input>
                     </div>
                     <div>
                         <label for="job-title">Job Title:  </label>
-                        <input name="job-title"></input>
+                        <input onChange={handleWorkPositionTitleChange} name="job-title"></input>
                     </div>
                 </div>
                 <div>
                     <div>
                         <label for="Start date">Start date:  </label>
-                        <input type="date" name="Start date"></input>
+                        <input onChange={handleWorkStartDateChange} type="date" name="Start date"></input>
                     </div>
                     <div>
                         <label for="End date">End date: </label>
-                        <input type="date" name="End date"></input>
+                        <input onChange={handleWorkEndDateChange} type="date" name="End date"></input>
                     </div>
                 </div>
             </div>
             <div>
-
+            <div>
+            </div>
             </div>
             <div className="education-form-buttons">
-                <button>Confirm</button>
+                <button type='submit'>Confirm</button>
                 <button onClick= {e=>{e.preventDefault(); toggleForm();}}>Cancel</button>
             </div>
         </form>

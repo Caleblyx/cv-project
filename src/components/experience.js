@@ -9,17 +9,39 @@ class Experience extends Component{
     }
 
     render(){
-        const{showExperienceForm, experienceInstances, toggleExperienceForm} = this.props;
+        const{
+        showExperienceForm, 
+        experienceInstances, toggleExperienceForm, onSubmitExperience, 
+        handleWorkCompanyNameChange, handleWorkPositionTitleChange, handleWorkStartDateChange, 
+        handleWorkEndDateChange, handleExperienceCompanyNameChangeInstance,
+        handleExperiencePositionTitleNameChangeInstance,
+        handleExperienceStartDateChangeInstance,
+        handleExperienceEndDateChangeInstance,
+        handleExperienceTaskDescriptionChangeInstance,
+        handleExperienceTaskDesciptionAddInstance,
+        handleExperienceTaskDescriptionDeleteInstance,
+        handleExperienceInstanceDeletion
+        } = this.props;
         const experienceSections = [];
 
         experienceInstances.forEach((experienceInstance) => {
             experienceSections.push(
                 <ExperienceInstance
+                    key = {experienceInstance.id}
+                    uid = {experienceInstance.id}
                     companyName = {experienceInstance.companyName}
                     positionTitle = {experienceInstance.positionTitle}
                     startDate = {experienceInstance.startDate} 
                     endDate = {experienceInstance.endDate}
-                    mainTasks = {experienceInstance.mainTasks}/>
+                    mainTasks = {experienceInstance.mainTasks}
+                    handleExperienceCompanyNameChangeInstance = {handleExperienceCompanyNameChangeInstance}
+                    handleExperiencePositionTitleNameChangeInstance = {handleExperiencePositionTitleNameChangeInstance}
+                    handleExperienceStartDateChangeInstance = {handleExperienceStartDateChangeInstance}
+                    handleExperienceEndDateChangeInstance = {handleExperienceEndDateChangeInstance}
+                    handleExperienceTaskDescriptionChangeInstance = {handleExperienceTaskDescriptionChangeInstance}
+                    handleExperienceTaskDesciptionAddInstance = {handleExperienceTaskDesciptionAddInstance}
+                    handleExperienceTaskDescriptionDeleteInstance = {handleExperienceTaskDescriptionDeleteInstance}
+                    handleExperienceInstanceDeletion = {handleExperienceInstanceDeletion}/>
             )
         })
         return (
@@ -27,7 +49,12 @@ class Experience extends Component{
                 <div className='section-title'>Experience</div>
                 {experienceSections}
                 <AddExperienceButton buttonType="Work" toggleForm={toggleExperienceForm}/>
-                {showExperienceForm? <AddWorkExperienceForm toggleForm={toggleExperienceForm} />: null}
+                {showExperienceForm? <AddWorkExperienceForm toggleForm={toggleExperienceForm} 
+                handleWorkCompanyNameChange={handleWorkCompanyNameChange} 
+                handleWorkPositionTitleChange = {handleWorkPositionTitleChange}
+                handleWorkStartDateChange = {handleWorkStartDateChange}
+                handleWorkEndDateChange = {handleWorkEndDateChange}
+                onSubmitExperience = {onSubmitExperience}/>: null}
             </div>
         );
     }

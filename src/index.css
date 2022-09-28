@@ -95,11 +95,9 @@ code {
 .react-datepicker-ignore-onclickoutside,
 .react-datepicker__input-container > input{
   width: 80px;
-}
-
-.react-datepicker-ignore-onclickoutside,
-.react-datepicker__input-container > input{
   border: none;
+  text-align: center;
+  font-size: 14px;
 }
 
 .react-datepicker__input-container > input:hover{
@@ -113,6 +111,25 @@ code {
   display: none;
 }
 
+.cancel-button:hover {
+  display: block;
+}
+
+.cancel-button-taskdesc {
+  width: 20px;
+  float: right;
+  display: none;
+}
+
 .education-instance:hover .cancel-button {
   display: block;
 }
+
+.task-description:hover .cancel-button-taskdesc{
+  display: block;
+}
+
+.experience-instance:hover .cancel-button {
+  display: block;
+}
+

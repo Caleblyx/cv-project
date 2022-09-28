@@ -10,7 +10,19 @@ class EducationInstance extends Component{
     }
    
     render() {
-        const {key, uid, institutionName, courseName, startDate, endDate, handleEducationInstitutionNameChangeInstance, handleEducationCourseNameChangeInstance, handleEducationStartDateChangeInstance, handleEducationEndDateChangeInstance, handleEducationInstanceDeletion} = this.props;
+        const {
+            key, 
+            uid, 
+            institutionName, 
+            courseName, 
+            startDate, 
+            endDate, 
+            handleEducationInstitutionNameChangeInstance, 
+            handleEducationCourseNameChangeInstance, 
+            handleEducationStartDateChangeInstance, 
+            handleEducationEndDateChangeInstance, 
+            handleEducationInstanceDeletion
+        } = this.props;
         return(
             <div className="education-instance">
                 <img src={CrossLogo} className='cancel-button' onClick={(e) => handleEducationInstanceDeletion(e, uid)}/>

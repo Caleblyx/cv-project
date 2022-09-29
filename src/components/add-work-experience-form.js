@@ -11,7 +11,7 @@ class AddWorkExperienceForm extends Component{
         return (
             <form onSubmit={onSubmitExperience} className="education-form">
             <div className="education-form-name-date">
-                <div>
+                <div className="form-column">
                     <div>
                         <label for="company-name">Company Name:  </label>
                         <input onChange={handleWorkCompanyNameChange} name="company-name"></input>
@@ -21,7 +21,7 @@ class AddWorkExperienceForm extends Component{
                         <input onChange={handleWorkPositionTitleChange} name="job-title"></input>
                     </div>
                 </div>
-                <div>
+                <div className="form-column">
                     <div>
                         <label for="Start date">Start date:  </label>
                         <input onChange={handleWorkStartDateChange} type="date" name="Start date"></input>

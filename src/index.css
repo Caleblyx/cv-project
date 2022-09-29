@@ -192,3 +192,16 @@ code {
   color: white;
 }
 
+label {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

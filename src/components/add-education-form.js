@@ -10,7 +10,7 @@ class AddEducationForm extends Component{
         return (
             <form onSubmit={onSubmitEducation} className="education-form">
                 <div className="education-form-name-date">
-                    <div>
+                    <div className="form-column">
                         <div>
                             <label htmlFor="institute-name">Institution Name:  </label>
                             <input onChange={handleEducationInstitutionNameChange} name="institute-name"></input>
@@ -20,14 +20,14 @@ class AddEducationForm extends Component{
                             <input onChange={handleEducationCourseNameChange} name="course-name"></input>
                          </div>
                     </div>
-                    <div>
+                    <div className = "form-column">
                         <div>
-                        <label htmlFor="Start date">Start date:  </label>
-                        <input onChange={handleEducationStartDateChange} type="date" name="Start date"></input>
+                            <label htmlFor="Start date">Start date:  </label>
+                            <input onChange={handleEducationStartDateChange} type="date" name="Start date"></input>
                         </div>
                         <div>
-                        <label htmlFor="End date">End date: </label>
-                        <input onChange={handleEducationEndDateChange} type="date" name="End date"></input>
+                            <label htmlFor="End date">End date: </label>
+                            <input onChange={handleEducationEndDateChange} type="date" name="End date"></input>
                         </div>
                     </div>
                 </div>

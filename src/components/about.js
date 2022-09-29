@@ -35,12 +35,12 @@ class About extends Component {
                 <input className="about-name" onInput={(e) =>{handleUserNameChange(e)}} value={name} />
                 <div className="about-details">
                     <div>E-Mail: </div>
-                    <input className="about-email" contentEditable={true} onInput={(e) =>{handleEmailChange(e)}} value={email}/>
+                    <input className="about-email" onInput={(e) =>{handleEmailChange(e)}} value={email}/>
                     <div className={`${this.validateEmail() ? 'fadeIn' : 'fadeOut'} popup`}>
                         <span className ={ `${this.validateEmail() ? 'fadeIn' : 'fadeOut'} popuptext`} id="myPopup">Please input a valid email address</span>
                     </div>
                     <div>Phone number: </div>
-                    <input className="about-phone-number" type="tel" contentEditable={true} onInput={(e) =>{handlePhoneNumberChange(e)}} value = {phoneNumber}/>
+                    <input className="about-phone-number" type="tel" onInput={(e) =>{handlePhoneNumberChange(e)}} value = {phoneNumber}/>
                     <div className={`${this.validatePhoneNumber() ? 'fadeIn' : 'fadeOut'} popup`}>
                         <span className ={ `${this.validatePhoneNumber() ? 'fadeIn' : 'fadeOut'} popuptext`} id="myPopup">Please input a valid phone number.</span>
                     </div>

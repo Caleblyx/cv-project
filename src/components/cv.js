@@ -10,7 +10,7 @@ class CV extends Component {
         this.state = {
             userName: "John Doe",
             eMail: "john_doe@email.com",
-            phoneNumber: "12345678",
+            phoneNumber: "1234567890",
             showEducationForm: false,
             showExperienceForm: false,
             educationInstances: [{id: uniqid(), institutionName:"Cool University", courseName:"Generic Degree", startDate:"2017-03", endDate:"2018-03"}],
@@ -69,42 +69,29 @@ class CV extends Component {
         this.handleEmailChange = this.handleEmailChange.bind(this);
     }
     handleEducationEndDateChangeInstance(date, uid) {
-        console.log("changing state...");
         let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
         const update = this.state.educationInstances.slice();
-        console.log(update);
         update[index].endDate = date.toString();
         this.setState({educationInstances: update});
     }
 
     handleEducationStartDateChangeInstance(date, uid) {
-        console.log("changing state...");
         let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
-        console.log(index);
         const update = this.state.educationInstances.slice();
-        console.log(update);
         update[index].startDate = date.toString();
         this.setState({educationInstances: update});
 
     }
     handleEducationInstitutionNameChangeInstance(e, uid) {
-        console.log("changing  state...");
-        console.log(uid);
         let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
-        console.log(index);
         const update = this.state.educationInstances.slice();
-        console.log(update);
         update[index].institutionName = e.target.value; 
         this.setState({educationInstances: update});   
     }
 
     handleEducationCourseNameChangeInstance(e, uid) {
-        console.log("changing  state...");
-        console.log(uid);
         let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
-        console.log(index);
         const update = this.state.educationInstances.slice();
-        console.log(update);
         update[index].courseName = e.target.value; 
         this.setState({educationInstances: update});   
     }
@@ -127,7 +114,6 @@ class CV extends Component {
 
     onSubmitExperience(e) {
         e.preventDefault();
-        console.log(this.state.workInputs);
         this.setState({
             experienceInstances: this.state.experienceInstances.concat(this.state.workInputs),
             workInputs: {
@@ -168,7 +154,6 @@ class CV extends Component {
     }
 
     handleEducationEndDateChange(e) {
-        console.log("changing state....");
         this.setState(prevState => ({
             educationInputs: {
                 id: prevState.educationInputs.id,
@@ -207,7 +192,6 @@ class CV extends Component {
     }
 
     handleWorkPositionTitleChange(e) {
-        console.log(e.target.value);
         this.setState(prevState => ({
             workInputs: {
                 id: prevState.workInputs.id,
@@ -265,12 +249,8 @@ class CV extends Component {
     }
 
     handleExperienceCompanyNameChangeInstance(e, uid) {
-        console.log("changing  state...");
-        console.log(uid);
         let index = this.state.experienceInstances.findIndex(instance=>instance.id == uid);
-        console.log(index);
         const update = this.state.experienceInstances.slice();
-        console.log(update);
         update[index].companyName = e.target.value; 
         this.setState({experienceInstances: update});   
     }
@@ -297,7 +277,6 @@ class CV extends Component {
     }
 
     handleExperienceTaskDescriptionChangeInstance(e, instanceId, taskId) {
-        console.log("Updating task description")
         let instanceIndex = this.state.experienceInstances.findIndex(instance => instance.id == instanceId);
         const update = this.state.experienceInstances.slice();
         let taskIndex = update[instanceIndex].mainTasks.findIndex(task => task.id == taskId)
@@ -306,7 +285,6 @@ class CV extends Component {
     }
 
     handleExperienceTaskDesciptionAddInstance(e, instanceId) {
-        console.log("add");
         let instanceIndex = this.state.experienceInstances.findIndex(instance => instance.id == instanceId);
         const update = this.state.experienceInstances.slice();
         update[instanceIndex].mainTasks.push({id: uniqid(), desc: "Edit me"});
@@ -314,13 +292,9 @@ class CV extends Component {
     }
 
     handleExperienceTaskDescriptionDeleteInstance(e, instanceId, taskId) {
-        console.log("deletion");
-        console.log(taskId);
         let instanceIndex = this.state.experienceInstances.findIndex(instance => instance.id == instanceId);
-        console.log(instanceIndex);
         const update = this.state.experienceInstances.slice();
         update[instanceIndex].mainTasks = update[instanceIndex].mainTasks.filter(task => task.id != taskId);
-        console.log(update);
         this.setState({experienceInstances: update});
     }
 
@@ -349,7 +323,6 @@ class CV extends Component {
     }
 
     render() {
-        console.log("rendering");
         const {showEducationForm, showExperienceForm} = this.state;
         return (
             <div className="page">

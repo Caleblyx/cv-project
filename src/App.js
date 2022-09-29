@@ -3,9 +3,12 @@ import './App.css';
 import {CV} from './components/cv.js';
 function App() {
   return (
-    <div className="backpage">
-      <CV />
-    </div>
+    <div>
+      <header>Resume Creator</header>
+      <div className="backpage">
+        <CV />
+      </div>
+    </div> 
   );
 }
 

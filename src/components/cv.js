@@ -3,7 +3,6 @@ import {About} from './about.js';
 import {Education} from './education.js'
 import {Experience} from './experience.js'
 import uniqid from "uniqid";
-import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers.js';
 
 class CV extends Component {
     constructor(props) {

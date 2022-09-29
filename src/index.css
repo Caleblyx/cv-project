@@ -20,8 +20,10 @@ code {
 .page{
   border: solid 1px black;
   width: 800px;
-  height: 1600px;
+  height: 1128px;
   padding: 50px 80px;
+  margin-bottom: 100px;
+  margin-top: 100px;
 }
 
 .about {

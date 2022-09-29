@@ -9,6 +9,9 @@ class CV extends Component {
     constructor(props) {
         super(props);  
         this.state = {
+            userName: "John Doe",
+            eMail: "john_doe@email.com",
+            phoneNumber: "12345678",
             showEducationForm: false,
             showExperienceForm: false,
             educationInstances: [{id: uniqid(), institutionName:"Cool University", courseName:"Generic Degree", startDate:"2017-03", endDate:"2018-03"}],
@@ -62,6 +65,9 @@ class CV extends Component {
         this.handleWorkEndDateChange = this.handleWorkEndDateChange.bind(this);
         this.handleWorkPositionTitleChange = this.handleWorkPositionTitleChange.bind(this);
 
+        this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
+        this.handleUserNameChange = this.handleUserNameChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
     }
     handleEducationEndDateChangeInstance(date, uid) {
         console.log("changing state...");
@@ -325,12 +331,30 @@ class CV extends Component {
         }))
     }
 
+    handleUserNameChange(e) {
+        this.setState(prevState => ({
+            userName: e.target.value
+        }))
+    }
+
+    handleEmailChange(e) {
+        this.setState(prevState => ({
+            eMail: e.target.value
+        }))
+    }
+
+    handlePhoneNumberChange(e) {
+        this.setState(prevState => ({
+            phoneNumber: e.target.value
+        }))
+    }
+
     render() {
         console.log("rendering");
         const {showEducationForm, showExperienceForm} = this.state;
         return (
             <div className="page">
-                <About name="John Doe" email="john_doe@mail.com" phoneNumber="11111111" />
+                <About name={this.state.userName} email={this.state.eMail} phoneNumber={this.state.phoneNumber} handleUserNameChange={this.handleUserNameChange} handleEmailChange = {this.handleEmailChange} handlePhoneNumberChange = {this.handlePhoneNumberChange}/>
                 <Education showEducationForm={showEducationForm} educationInstances={this.state.educationInstances} 
                 toggleEducationForm={this.toggleEducationForm} handleEducationCourseNameChange = {this.handleEducationCourseNameChange} 
                 handleEducationStartDateChange = {this.handleEducationStartDateChange} handleEducationEndDateChange = {this.handleEducationEndDateChange} 

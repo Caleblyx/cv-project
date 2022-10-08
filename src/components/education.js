@@ -18,7 +18,6 @@ const Education = ({
     handleEducationInstanceDeletion 
     }) => {
     const educationSections = [];
-        console.log("component did mount");
         educationInstances.forEach((educationInstance) => {
         educationSections.push(
             <EducationInstance

@@ -1,360 +1,256 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {About} from './about.js';
 import {Education} from './education.js'
 import {Experience} from './experience.js'
 import uniqid from "uniqid";
 
-class CV extends Component {
-    constructor(props) {
-        super(props);  
-        this.state = {
-            userName: "John Doe",
-            eMail: "john_doe@email.com",
-            phoneNumber: "1234567890",
-            showEducationForm: false,
-            showExperienceForm: false,
-            educationInstances: [{id: uniqid(), institutionName:"Cool University", courseName:"Generic Degree", startDate:"2017-03", endDate:"2018-03"}],
-            experienceInstances: [{id: uniqid(), companyName:"Cool company", positionTitle:"Software Engineer", startDate:"2018-05", endDate:"2019-01", mainTasks:[{id: uniqid(), desc:"Develop cool applications"}, {id: uniqid(), desc: "Create good user experiences"}]}],
-            educationInputs: {
-                id: uniqid(),
-                institutionName: "",
-                startDate: "",
-                endDate: "",
-                courseName: ""   
-            },
-            workInputs: {
-                id: uniqid(),
-                companyName: "",
-                positionTitle: "",
-                startDate: "",
-                endDate: "",
-                mainTasks: []
-            }
-
-        }
-        //Methods for instance changes
-        this.handleEducationInstitutionNameChangeInstance = this.handleEducationInstitutionNameChangeInstance.bind(this);
-        this.handleEducationCourseNameChangeInstance = this.handleEducationCourseNameChangeInstance.bind(this);
-        this.handleEducationStartDateChangeInstance = this.handleEducationStartDateChangeInstance.bind(this);
-        this.handleEducationEndDateChangeInstance = this.handleEducationEndDateChangeInstance.bind(this);
-        this.handleEducationInstanceDeletion = this.handleEducationInstanceDeletion.bind(this);
-
-        this.handleExperienceCompanyNameChangeInstance = this.handleExperienceCompanyNameChangeInstance.bind(this);
-        this.handleExperiencePositionTitleChangeInstance = this.handleExperiencePositionTitleChangeInstance.bind(this);
-        this.handleExperienceStartDateChangeInstance = this.handleExperienceStartDateChangeInstance.bind(this);
-        this.handleExperienceEndDateChangeInstance = this.handleExperienceEndDateChangeInstance.bind(this);
-        this.handleExperienceTaskDescriptionChangeInstance = this.handleExperienceTaskDescriptionChangeInstance.bind(this); 
-        this.handleExperienceTaskDesciptionAddInstance = this.handleExperienceTaskDesciptionAddInstance.bind(this);
-        this.handleExperienceTaskDescriptionDeleteInstance = this.handleExperienceTaskDescriptionDeleteInstance.bind(this);
-        this.handleExperienceInstanceDeletion = this.handleExperienceInstanceDeletion.bind(this);
-        //Methods for insitution name change in forms
-        this.handleEducationInstitutionNameChange = this.handleEducationInstitutionNameChange.bind(this);
-        this.handleEducationStartDateChange = this.handleEducationStartDateChange.bind(this);
-        this.handleEducationCourseNameChange = this.handleEducationCourseNameChange.bind(this);
-        this.handleEducationEndDateChange = this.handleEducationEndDateChange.bind(this);
-
-        this.toggleEducationForm = this.toggleEducationForm.bind(this);
-        this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
-
-        this.onSubmitExperience = this.onSubmitExperience.bind(this);
-        this.onSubmitEducation = this.onSubmitEducation.bind(this);
-        
-        this.handleWorkCompanyNameChange = this.handleWorkCompanyNameChange.bind(this);
-        this.handleWorkStartDateChange = this.handleWorkStartDateChange.bind(this);
-        this.handleWorkEndDateChange = this.handleWorkEndDateChange.bind(this);
-        this.handleWorkPositionTitleChange = this.handleWorkPositionTitleChange.bind(this);
-
-        this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
-        this.handleUserNameChange = this.handleUserNameChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-    }
-    handleEducationEndDateChangeInstance(date, uid) {
-        let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
-        const update = this.state.educationInstances.slice();
+const CV = () => {
+    const [userName, setUserName] = useState("John Doe")
+    const [eMail, setEMail] = useState("john_doe@email.com")
+    const [phoneNumber, setPhoneNumber] = useState("1234567890")
+    const [showEducationForm, setShowEducationForm] = useState(false);
+    const [showExperienceForm, setShowExperienceForm] = useState(false);
+    const [educationInstances, setEducationInstances] = useState([{id: uniqid(), institutionName:"Cool University", courseName:"Generic Degree", startDate:"2017-03", endDate:"2018-03"}]);
+    const [experienceInstances, setExperienceInstances] = useState([{id: uniqid(), companyName:"Cool company", positionTitle:"Software Engineer", startDate:"2018-05", endDate:"2019-01", mainTasks:[{id: uniqid(), desc:"Develop cool applications"}, {id: uniqid(), desc: "Create good user experiences"}]}]);
+    const [educationInputs, setEducationInputs] = useState({
+        id: uniqid(),
+        institutionName: "",
+        startDate: "",
+        endDate: "",
+        courseName: ""   
+    })
+    const [workInputs, setWorkInputs] = useState({
+        id: uniqid(),
+        companyName: "",
+        positionTitle: "",
+        startDate: "",
+        endDate: "",
+        mainTasks: []
+    })
+    const handleEducationEndDateChangeInstance = (date, uid) => {
+        let index = educationInstances.findIndex(instance=>instance.id == uid);
+        const update = educationInstances.slice();
         update[index].endDate = date.toString();
-        this.setState({educationInstances: update});
+        setEducationInstances(update);
     }
 
-    handleEducationStartDateChangeInstance(date, uid) {
-        let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
-        const update = this.state.educationInstances.slice();
+    const handleEducationStartDateChangeInstance = (date, uid) => {
+        let index = educationInstances.findIndex(instance=>instance.id == uid);
+        const update = educationInstances.slice();
         update[index].startDate = date.toString();
-        this.setState({educationInstances: update});
+        setEducationInstances(update);
 
     }
-    handleEducationInstitutionNameChangeInstance(e, uid) {
-        let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
-        const update = this.state.educationInstances.slice();
+    const handleEducationInstitutionNameChangeInstance = (e, uid) => {
+        let index = educationInstances.findIndex(instance=>instance.id == uid);
+        const update = educationInstances.slice();
         update[index].institutionName = e.target.value; 
-        this.setState({educationInstances: update});   
+        setEducationInstances(update);
     }
 
-    handleEducationCourseNameChangeInstance(e, uid) {
-        let index = this.state.educationInstances.findIndex(instance=>instance.id == uid);
-        const update = this.state.educationInstances.slice();
+    const handleEducationCourseNameChangeInstance = (e, uid) => {
+        let index = educationInstances.findIndex(instance=>instance.id == uid);
+        const update = educationInstances.slice();
         update[index].courseName = e.target.value; 
-        this.setState({educationInstances: update});   
+        setEducationInstances(update); 
     }
 
-    onSubmitEducation(e) {
+    const onSubmitEducation = (e) => {
         e.preventDefault();
-        this.setState({
-            educationInstances: this.state.educationInstances.concat(this.state.educationInputs),
-            educationInputs: {
-                id: uniqid(),
-                institutionName: "",
-                startDate: "",
-                endDate: "",
-                courseName: ""
-            },
-            showEducationForm: false
+        setEducationInstances(prev => [...prev, educationInputs])
+        setEducationInputs({
+            id: uniqid(),
+            institutionName: "",
+            startDate: "",
+            endDate: "",
+            courseName: ""
         })
+        setShowEducationForm(false);
     }
 
 
-    onSubmitExperience(e) {
+    const onSubmitExperience = (e) => {
         e.preventDefault();
-        this.setState({
-            experienceInstances: this.state.experienceInstances.concat(this.state.workInputs),
-            workInputs: {
-                id: uniqid(),
-                companyName: "",
-                positionTitle: "",
-                startDate: "",
-                endDate: "",
-                mainTasks: []
-            },
-            showExperienceForm: false
+        setExperienceInstances(prev => [...prev, workInputs])
+        setWorkInputs({
+            id: uniqid(),
+            companyName: "",
+            positionTitle: "",
+            startDate: "",
+            endDate: "",
+            mainTasks: []
         })
-        
+        setShowExperienceForm(false)
     }
 
-    handleEducationInstitutionNameChange(e) {
-        this.setState(prevState => ({
-            educationInputs: {
-                id: prevState.educationInputs.id,
-                institutionName: e.target.value,
-                startDate: prevState.educationInputs.startDate,
-                endDate: prevState.educationInputs.endDate,
-                courseName: prevState.educationInputs.courseName
-            }
-        }));
-    }
-
-    handleEducationStartDateChange(e) {
-        this.setState(prevState => ({
-            educationInputs: {
-                id: prevState.educationInputs.id,
-                institutionName: prevState.educationInputs.institutionName,
-                startDate: e.target.value,
-                endDate: prevState.educationInputs.endDate,
-                courseName: prevState.educationInputs.courseName
-            }
-        }));
-    }
-
-    handleEducationEndDateChange(e) {
-        this.setState(prevState => ({
-            educationInputs: {
-                id: prevState.educationInputs.id,
-                institutionName: prevState.educationInputs.institutionName,
-                startDate: prevState.educationInputs.startDate,
-                endDate: e.target.value,
-                courseName: prevState.educationInputs.courseName
-            }
-        }));
-        
-    }
-
-    handleEducationCourseNameChange(e) {
-        this.setState(prevState => ({
-            educationInputs: {
-                id: prevState.educationInputs.id,
-                institutionName: prevState.educationInputs.institutionName,
-                startDate: prevState.educationInputs.startDate,
-                endDate: prevState.educationInputs.endDate,
-                courseName: e.target.value
-            }
-        }));
-    }
-
-    handleWorkCompanyNameChange(e) {
-        this.setState(prevState => ({
-            workInputs: {
-                id: prevState.workInputs.id,
-                companyName: e.target.value,
-                poitionTitle: prevState.workInputs.positionTitle,
-                startDate: prevState.workInputs.startDate,
-                endDate: prevState.workInputs.endDate,
-                mainTasks: prevState.workInputs.mainTasks
-            }
-        }));
-    }
-
-    handleWorkPositionTitleChange(e) {
-        this.setState(prevState => ({
-            workInputs: {
-                id: prevState.workInputs.id,
-                companyName: prevState.workInputs.companyName,
-                positionTitle: e.target.value,
-                startDate: prevState.workInputs.startDate,
-                endDate: prevState.workInputs.endDate,
-                mainTasks: prevState.workInputs.mainTasks
-            }
-        }));
-    }
-
-    handleWorkStartDateChange(e){
-        this.setState(prevState => ({
-            workInputs: {
-                id: prevState.workInputs.id,
-                companyName: prevState.workInputs.companyName,
-                positionTitle: prevState.workInputs.positionTitle,
-                startDate: e.target.value,
-                endDate: prevState.workInputs.endDate,
-                mainTasks: prevState.workInputs.mainTasks
-            }
-        }));
-    }
-
-    handleWorkEndDateChange(e){
-        this.setState(prevState => ({
-            workInputs: {
-                id: prevState.workInputs.id,
-                companyName: prevState.workInputs.companyName,
-                positionTitle: prevState.workInputs.positionTitle,
-                startDate: prevState.workInputs.startDate,
-                endDate: e.target.value,
-                mainTasks: prevState.workInputs.mainTasks
-            }
-        }));
-    }
-
-    toggleEducationForm() {
-        this.setState(prevState => ({
-            showEducationForm: !prevState.showEducationForm
-        }));
-    }
-
-    toggleExperienceForm() {
-        this.setState(prevState => ({
-            showExperienceForm: !prevState.showExperienceForm
-        }));
-    }
-
-    handleEducationInstanceDeletion(e, uid) {
-        this.setState(prevState => ({
-            educationInstances: prevState.educationInstances.filter(educationInstance => educationInstance.id != uid)
+    const handleEducationInstitutionNameChange = (e) => {
+        setEducationInputs(prevState => ({
+            ...prevState,
+            institutionName: e.target.value
         }))
     }
 
-    handleExperienceCompanyNameChangeInstance(e, uid) {
-        let index = this.state.experienceInstances.findIndex(instance=>instance.id == uid);
-        const update = this.state.experienceInstances.slice();
+    const handleEducationStartDateChange = (e) => {
+        setEducationInputs(prevState => ({
+            ...prevState,
+            startDate: e.target.value
+        }));
+    }
+
+    const handleEducationEndDateChange = (e) => {
+        setEducationInputs(prevState => ({
+            ...prevState,
+            endDate: e.target.value
+        }))
+    }
+
+    const handleEducationCourseNameChange = (e) => {
+        setEducationInputs(prevState => ({
+            ...prevState,
+            courseName: e.target.value
+        }));
+    }
+
+    const handleWorkCompanyNameChange = (e) => {
+        setWorkInputs(prevState => ({
+            ...prevState,
+            companyName: e.target.value
+        }))
+    }
+
+    const handleWorkPositionTitleChange = (e) => {
+        setWorkInputs(prevState => ({
+            ...prevState,
+            positionTitle: e.target.value
+        }))
+    }
+
+    const handleWorkStartDateChange = (e) => {
+        setWorkInputs(prevState => ({
+            ...prevState,
+            startDate: e.target.value
+        }))
+    }
+
+    const handleWorkEndDateChange = (e) => {
+        setWorkInputs(prevState => ({
+            ...prevState,
+            endDate: e.target.value
+        }))
+    }
+
+    const toggleEducationForm = () => {
+        setShowEducationForm(prevState => !prevState);
+    }
+
+    const toggleExperienceForm = () => {
+        setShowExperienceForm(prevState => !prevState);
+    }
+
+    const handleEducationInstanceDeletion = (e, uid) => {
+        setEducationInstances(prevState => 
+            prevState.filter(educationInstance => educationInstance.id != uid)
+        )
+    }
+
+    const handleExperienceCompanyNameChangeInstance = (e, uid) => {
+        let index = experienceInstances.findIndex(instance=>instance.id == uid);
+        const update = experienceInstances.slice();
         update[index].companyName = e.target.value; 
-        this.setState({experienceInstances: update});   
+        setExperienceInstances(update);
     }
 
-    handleExperiencePositionTitleChangeInstance(e,uid) {
-        let index = this.state.experienceInstances.findIndex(instance => instance.id == uid);
-        const update = this.state.experienceInstances.slice();
+    const handleExperiencePositionTitleChangeInstance = (e,uid) => {
+        let index = experienceInstances.findIndex(instance => instance.id == uid);
+        const update = experienceInstances.slice();
         update[index].positionTitle = e.target.value;
-        this.setState({experienceInstances: update});
+        setExperienceInstances(update);
     }
 
-    handleExperienceStartDateChangeInstance(date,uid) {
-        let index = this.state.experienceInstances.findIndex(instance => instance.id == uid);
-        const update = this.state.experienceInstances.slice();
+    const handleExperienceStartDateChangeInstance = (date,uid) => {
+        let index = experienceInstances.findIndex(instance => instance.id == uid);
+        const update = experienceInstances.slice();
         update[index].startDate = date.toString();
-        this.setState({experienceInstances: update});
+        setExperienceInstances(update);
     }
 
-    handleExperienceEndDateChangeInstance(date, uid) {
-        let index = this.state.experienceInstances.findIndex(instance => instance.id == uid);
-        const update = this.state.experienceInstances.slice();
+    const handleExperienceEndDateChangeInstance = (date, uid) => {
+        let index = experienceInstances.findIndex(instance => instance.id == uid);
+        const update = experienceInstances.slice();
         update[index].endDate = date.toString();
-        this.setState({experienceInstances: update});
+        setExperienceInstances(update);
     }
 
-    handleExperienceTaskDescriptionChangeInstance(e, instanceId, taskId) {
-        let instanceIndex = this.state.experienceInstances.findIndex(instance => instance.id == instanceId);
-        const update = this.state.experienceInstances.slice();
+    const handleExperienceTaskDescriptionChangeInstance = (e, instanceId, taskId) => {
+        let instanceIndex = experienceInstances.findIndex(instance => instance.id == instanceId);
+        const update = experienceInstances.slice();
         let taskIndex = update[instanceIndex].mainTasks.findIndex(task => task.id == taskId)
         update[instanceIndex].mainTasks[taskIndex] = e.target.value;
-        this.setState({experienceInstance: update});
+        setExperienceInstances(update);
     }
 
-    handleExperienceTaskDesciptionAddInstance(e, instanceId) {
-        let instanceIndex = this.state.experienceInstances.findIndex(instance => instance.id == instanceId);
-        const update = this.state.experienceInstances.slice();
+    const handleExperienceTaskDesciptionAddInstance = (e, instanceId) => {
+        let instanceIndex = experienceInstances.findIndex(instance => instance.id == instanceId);
+        const update = experienceInstances.slice();
         update[instanceIndex].mainTasks.push({id: uniqid(), desc: "Edit me"});
-        this.setState({experienceInstances: update});
+        setExperienceInstances(update);
     }
 
-    handleExperienceTaskDescriptionDeleteInstance(e, instanceId, taskId) {
-        let instanceIndex = this.state.experienceInstances.findIndex(instance => instance.id == instanceId);
-        const update = this.state.experienceInstances.slice();
+    const handleExperienceTaskDescriptionDeleteInstance = (e, instanceId, taskId) => {
+        let instanceIndex = experienceInstances.findIndex(instance => instance.id == instanceId);
+        const update = experienceInstances.slice();
         update[instanceIndex].mainTasks = update[instanceIndex].mainTasks.filter(task => task.id != taskId);
-        this.setState({experienceInstances: update});
+        setExperienceInstances(update);
     }
 
-    handleExperienceInstanceDeletion(e, uid) {
-        this.setState(prevState => ({
-            experienceInstances: prevState.experienceInstances.filter(experienceInstance => experienceInstance.id != uid)
-        }))
+    const handleExperienceInstanceDeletion = (e, uid) => {
+        setExperienceInstances(prevState => (
+            prevState.filter(experienceInstance => experienceInstance.id != uid)
+        ))
     }
 
-    handleUserNameChange(e) {
-        this.setState(prevState => ({
-            userName: e.target.value
-        }))
+    const handleUserNameChange = (e) => {
+        setUserName(e.target.value);
     }
 
-    handleEmailChange(e) {
-        this.setState(prevState => ({
-            eMail: e.target.value
-        }))
+    const handleEmailChange = (e) => {
+        setEMail(e.target.value);
     }
 
-    handlePhoneNumberChange(e) {
-        this.setState(prevState => ({
-            phoneNumber: e.target.value
-        }))
+    const handlePhoneNumberChange = (e) => {
+        setPhoneNumber(e.target.value);
     }
+    return (
+        <div className="page">
+            <About name={userName} email={eMail} phoneNumber={phoneNumber} handleUserNameChange={handleUserNameChange} handleEmailChange = {handleEmailChange} handlePhoneNumberChange = {handlePhoneNumberChange}/>
+            <Education showEducationForm={showEducationForm} educationInstances={educationInstances} 
+            toggleEducationForm={toggleEducationForm} handleEducationCourseNameChange = {handleEducationCourseNameChange} 
+            handleEducationStartDateChange = {handleEducationStartDateChange} handleEducationEndDateChange = {handleEducationEndDateChange} 
+            handleEducationInstitutionNameChange = {handleEducationInstitutionNameChange} 
+            onSubmitEducation = {onSubmitEducation} handleEducationInstitutionNameChangeInstance={handleEducationInstitutionNameChangeInstance}
+            handleEducationCourseNameChangeInstance={handleEducationCourseNameChangeInstance}
+            handleEducationStartDateChangeInstance = {handleEducationStartDateChangeInstance}
+            handleEducationEndDateChangeInstance = {handleEducationEndDateChangeInstance}
+            handleEducationInstanceDeletion = {handleEducationInstanceDeletion}/>
+            <Experience showExperienceForm={showExperienceForm} 
+            experienceInstances={experienceInstances} 
+            toggleExperienceForm={toggleExperienceForm} 
+            onSubmitExperience={onSubmitExperience}
+            handleWorkCompanyNameChange={handleWorkCompanyNameChange} 
+            handleWorkPositionTitleChange={handleWorkPositionTitleChange} 
+            handleWorkStartDateChange={handleWorkStartDateChange}
+            handleWorkEndDateChange={handleWorkEndDateChange}
+            handleExperienceCompanyNameChangeInstance={handleExperienceCompanyNameChangeInstance}
+            handleExperiencePositionTitleChangeInstance={handleExperiencePositionTitleChangeInstance}
+            handleExperienceStartDateChangeInstance={handleExperienceStartDateChangeInstance}
+            handleExperienceEndDateChangeInstance={handleExperienceEndDateChangeInstance}
+            handleExperienceTaskDescriptionChangeInstance={handleExperienceTaskDescriptionChangeInstance}
+            handleExperienceTaskDesciptionAddInstance={handleExperienceTaskDesciptionAddInstance}
+            handleExperienceTaskDescriptionDeleteInstance={handleExperienceTaskDescriptionDeleteInstance}
+            handleExperienceInstanceDeletion = {handleExperienceInstanceDeletion}/>
+        </div>
+    );
+}
 
-    render() {
-        const {showEducationForm, showExperienceForm} = this.state;
-        return (
-            <div className="page">
-                <About name={this.state.userName} email={this.state.eMail} phoneNumber={this.state.phoneNumber} handleUserNameChange={this.handleUserNameChange} handleEmailChange = {this.handleEmailChange} handlePhoneNumberChange = {this.handlePhoneNumberChange}/>
-                <Education showEducationForm={showEducationForm} educationInstances={this.state.educationInstances} 
-                toggleEducationForm={this.toggleEducationForm} handleEducationCourseNameChange = {this.handleEducationCourseNameChange} 
-                handleEducationStartDateChange = {this.handleEducationStartDateChange} handleEducationEndDateChange = {this.handleEducationEndDateChange} 
-                handleEducationInstitutionNameChange = {this.handleEducationInstitutionNameChange} 
-                onSubmitEducation = {this.onSubmitEducation} handleEducationInstitutionNameChangeInstance={this.handleEducationInstitutionNameChangeInstance}
-                handleEducationCourseNameChangeInstance={this.handleEducationCourseNameChangeInstance}
-                handleEducationStartDateChangeInstance = {this.handleEducationStartDateChangeInstance}
-                handleEducationEndDateChangeInstance = {this.handleEducationEndDateChangeInstance}
-                handleEducationInstanceDeletion = {this.handleEducationInstanceDeletion}/>
-                <Experience showExperienceForm={showExperienceForm} 
-                experienceInstances={this.state.experienceInstances} 
-                toggleExperienceForm={this.toggleExperienceForm} 
-                onSubmitExperience={this.onSubmitExperience}
-                handleWorkCompanyNameChange={this.handleWorkCompanyNameChange} 
-                handleWorkPositionTitleChange={this.handleWorkPositionTitleChange} 
-                handleWorkStartDateChange={this.handleWorkStartDateChange}
-                handleWorkEndDateChange={this.handleWorkEndDateChange}
-                handleExperienceCompanyNameChangeInstance={this.handleExperienceCompanyNameChangeInstance}
-                handleExperiencePositionTitleChangeInstance={this.handleExperiencePositionTitleChangeInstance}
-                handleExperienceStartDateChangeInstance={this.handleExperienceStartDateChangeInstance}
-                handleExperienceEndDateChangeInstance={this.handleExperienceEndDateChangeInstance}
-                handleExperienceTaskDescriptionChangeInstance={this.handleExperienceTaskDescriptionChangeInstance}
-                handleExperienceTaskDesciptionAddInstance={this.handleExperienceTaskDesciptionAddInstance}
-                handleExperienceTaskDescriptionDeleteInstance={this.handleExperienceTaskDescriptionDeleteInstance}
-                handleExperienceInstanceDeletion = {this.handleExperienceInstanceDeletion}/>
-            </div>
-        );
-    }
-}  
 
 export {CV};

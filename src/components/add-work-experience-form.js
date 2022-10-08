@@ -12,21 +12,21 @@ const AddWorkExperienceForm = ({
         <div className="education-form-name-date">
             <div className="form-column">
                 <div>
-                    <label for="company-name">Company Name:  </label>
+                    <label htmlFor="company-name">Company Name:  </label>
                     <input onChange={handleWorkCompanyNameChange} name="company-name"></input>
                 </div>
                 <div>
-                    <label for="job-title">Job Title:  </label>
+                    <label htmlFor="job-title">Job Title:  </label>
                     <input onChange={handleWorkPositionTitleChange} name="job-title"></input>
                 </div>
             </div>
             <div className="form-column">
                 <div>
-                    <label for="Start date">Start date:  </label>
+                    <label htmlFor="Start date">Start date:  </label>
                     <input onChange={handleWorkStartDateChange} type="date" name="Start date"></input>
                 </div>
                 <div>
-                    <label for="End date">End date: </label>
+                    <label htmlFor="End date">End date: </label>
                     <input onChange={handleWorkEndDateChange} type="date" name="End date"></input>
                 </div>
             </div>
